@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Asset</title>
+</head>
+<body>
+
+<h1>Edit Asset</h1>
+
+<form method="POST">
+
+    <label>Asset Tag</label><br>
+    <input type="text" name="asset_tag" value="{{ asset.asset_tag }}"><br><br>
+
+    <label>Name</label><br>
+    <input type="text" name="name" value="{{ asset.name }}"><br><br>
+
+    <label>Brand</label><br>
+    <input type="text" name="brand" value="{{ asset.brand }}"><br><br>
+
+    <label>Model</label><br>
+    <input type="text" name="model" value="{{ asset.model }}"><br><br>
+
+    <label>Status</label><br>
+
+    <select name="status">
+        <option>{{ asset.status }}</option>
+        <option>Active</option>
+        <option>Maintenance</option>
+        <option>Inactive</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Update Asset
+    </button>
+
+</form>
+
+</body>
+</html>

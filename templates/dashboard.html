@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h1>Dashboard</h1>
+
+<div class="row mt-4">
+
+    <div class="col-md-4">
+
+        <div class="card p-3">
+            <h5>Total Assets</h5>
+            <h2>{{ total_assets }}</h2>
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-3">
+            <h5>Active Assets</h5>
+            <h2>{{ active_assets }}</h2>
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-3">
+            <h5>Interventions</h5>
+            <h2>0</h2>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

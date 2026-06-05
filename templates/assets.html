@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Assets Management</h1>
+
+<a href="/add-asset">
+    <button class="btn-primary">Add Asset</button>
+</a>
+
+<br><br>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Asset Tag</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for asset in assets %}
+    <tr>
+        <td>{{ asset.id }}</td>
+        <td>{{ asset.asset_tag }}</td>
+        <td>{{ asset.name }}</td>
+        <td>{{ asset.brand }}</td>
+        <td>{{ asset.model }}</td>
+        <td>{{ asset.status }}</td>
+
+        <td>
+            <a href="/edit-asset/{{ asset.id }}">
+                <button class="btn-warning">Edit</button>
+            </a>
+
+            <a href="/delete-asset/{{ asset.id }}">
+                <button class="btn-danger">Delete</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
