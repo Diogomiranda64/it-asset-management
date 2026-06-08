@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, send_file
 from database import get_connection
+import pandas as pd
 
 app = Flask(__name__)
 app.secret_key = "evolve_secret_key"
@@ -201,10 +202,25 @@ def delete_asset(id):
 @app.route('/reports')
 def reports():
 
-    if 'user' not in session:
-        return redirect('/login')
+    conn = get_connection()
+    cursor = conn.cursor()
 
-    return render_template('reports.html')
+    cursor.execute("SELECT COUNT(*) FROM assets")
+    total_assets = cursor.fetchone()[0]
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM assets WHERE status='Active'"
+    )
+    active_assets = cursor.fetchone()[0]
+
+    cursor.close()
+    conn.close()
+
+    return render_template(
+        'reports.html',
+        total_assets=total_assets,
+        active_assets=active_assets
+    )
 
 
 @app.route('/interventions')
@@ -221,6 +237,25 @@ def logout():
     session.clear()
     return redirect('/login')
 
+@app.route('/export-assets')
+def export_assets():
+
+    conn = get_connection()
+
+    query = "SELECT * FROM assets"
+
+    df = pd.read_sql(query, conn)
+
+    conn.close()
+
+    filename = "assets_report.csv"
+
+    df.to_csv(filename, index=False)
+
+    return send_file(
+        filename,
+        as_attachment=True
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

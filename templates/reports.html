@@ -4,6 +4,62 @@
 
 <h1>Reports</h1>
 
-<p>Reports page under development.</p>
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Assets</h3>
+        <div class="number">{{ total_assets }}</div>
+    </div>
+
+    <div class="card">
+        <h3>Active Assets</h3>
+        <div class="number">{{ active_assets }}</div>
+    </div>
+
+</div>
+
+<br><br>
+
+<a href="/export-assets">
+    <button class="btn-primary">
+        Export Assets CSV
+    </button>
+</a>
+
+<style>
+
+.cards{
+    display:flex;
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    min-width:220px;
+}
+
+.number{
+    font-size:32px;
+    font-weight:bold;
+    color:#4e73df;
+}
+
+.btn-primary{
+    background:#4e73df;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.btn-primary:hover{
+    background:#2e59d9;
+}
+
+</style>
 
 {% endblock %}
