@@ -8,8 +8,26 @@ app.secret_key = "evolve_secret_key"
 
 @app.route('/')
 def home():
-    return render_template("index.html")
 
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM assets")
+    total_assets = cursor.fetchone()[0]
+
+    cursor.execute(
+        "SELECT COUNT(*) FROM assets WHERE status='Active'"
+    )
+    active_assets = cursor.fetchone()[0]
+
+    cursor.close()
+    conn.close()
+
+    return render_template(
+        "index.html",
+        total_assets=total_assets,
+        active_assets=active_assets
+    )
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
